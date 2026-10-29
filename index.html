@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#080b0a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Rotgold is a fast, touch-first zombie survival game. Collect gold, upgrade your weapon, and break the zombie civilization.">
+  <meta property="og:title" content="ROTGOLD — Loot the horde">
+  <meta property="og:description" content="Collect coins. Upgrade your weapon. Break the zombie civilization.">
+  <meta property="og:type" content="website">
+  <title>ROTGOLD — Loot the horde</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080b0a'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%23ffce5c'/%3E%3Ccircle cx='32' cy='32' r='12' fill='none' stroke='%23080b0a' stroke-width='3'/%3E%3Cpath d='M32 20v24M26 26h12M26 38h12' stroke='%23080b0a' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="svg-bank" aria-hidden="true">
+    <symbol id="ico-coin" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="currentColor"/>
+      <circle cx="12" cy="12" r="5.5" fill="none" stroke="#080b0a" stroke-width="1.8" opacity=".55"/>
+      <path d="M12 7.5v9M9.5 10h5M9.5 14h5" fill="none" stroke="#080b0a" stroke-width="1.8" stroke-linecap="round" opacity=".75"/>
+    </symbol>
+    <symbol id="ico-heart" viewBox="0 0 24 24">
+      <path d="M12 20.5S3.5 15.1 3.5 9.2A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.5 3.1c0 5.9-8.5 11.3-8.5 11.3Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ico-pause" viewBox="0 0 24 24">
+      <rect x="6" y="4" width="4" height="16" rx="1.2" fill="currentColor"/>
+      <rect x="14" y="4" width="4" height="16" rx="1.2" fill="currentColor"/>
+    </symbol>
+    <symbol id="ico-play" viewBox="0 0 24 24">
+      <path d="M8 4.8c0-1.1 1.2-1.7 2.1-1.1l9.1 6.2a1.3 1.3 0 0 1 0 2.2l-9.1 6.2c-.9.6-2.1 0-2.1-1.1V4.8Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ico-sound" viewBox="0 0 24 24">
+      <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+      <path d="M16 8.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-mute" viewBox="0 0 24 24">
+      <path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/>
+      <path d="m17 9 5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-dash" viewBox="0 0 24 24">
+      <path d="m4 6 7 6-7 6V6Zm9 0 7 6-7 6V6Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ico-skull" viewBox="0 0 24 24">
+      <path d="M12 2.8a8.2 8.2 0 0 0-8.2 8.1c0 3 1.5 4.9 3.2 6v2.4c0 1 .8 1.8 1.8 1.8h6.4c1 0 1.8-.8 1.8-1.8v-2.4c1.7-1.1 3.2-3 3.2-6A8.2 8.2 0 0 0 12 2.8Z" fill="currentColor"/>
+      <circle cx="8.8" cy="11" r="2" fill="#080b0a"/>
+      <circle cx="15.2" cy="11" r="2" fill="#080b0a"/>
+      <path d="M10 16h4M12 15v3" stroke="#080b0a" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-bolt" viewBox="0 0 24 24">
+      <path d="M13.5 2 4.8 13.1h5.4L9.6 22l9.4-12.1h-5.8L13.5 2Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ico-split" viewBox="0 0 24 24">
+      <path d="M4 12h6M10 12 20 4M10 12l10 8M14 12h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-pierce" viewBox="0 0 24 24">
+      <path d="M3 12h14m-4-5 6 5-6 5M6 6l3 6-3 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-magnet" viewBox="0 0 24 24">
+      <path d="M5 4v8a7 7 0 0 0 14 0V4h-4v8a3 3 0 0 1-6 0V4H5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M5 7.5h4M15 7.5h4" stroke="currentColor" stroke-width="2.2"/>
+    </symbol>
+    <symbol id="ico-vitality" viewBox="0 0 24 24">
+      <path d="M12 3v18M3 12h18" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ico-evolve" viewBox="0 0 24 24">
+      <path d="m5 14 7-7 7 7M5 21l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-caliber" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M12 2v5M12 17v5M2 12h5M17 12h5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+    </symbol>
+    <symbol id="ico-shield" viewBox="0 0 24 24">
+      <path d="M12 2 4.5 5v6c0 5.2 3.2 9.1 7.5 11 4.3-1.9 7.5-5.8 7.5-11V5L12 2Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ico-arrow" viewBox="0 0 24 24">
+      <path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <canvas id="game" aria-label="Rotgold zombie survival arena"></canvas>
+  <div class="screen-grain" aria-hidden="true"></div>
+  <div class="screen-vignette" aria-hidden="true"></div>
+  <div id="hurtFlash" class="hurt-flash" aria-hidden="true"></div>
+
+  <div id="hud" class="hud" hidden>
+    <header class="hud-top">
+      <div class="status-card">
+        <div class="hp-line">
+          <svg class="icon hp-icon"><use href="#ico-heart"/></svg>
+          <div class="hp-track"><div id="hpFill" class="hp-fill"></div></div>
+          <span id="hpText" class="hp-text">100</span>
+        </div>
+        <div class="coin-line">
+          <svg class="icon coin-icon"><use href="#ico-coin"/></svg>
+          <strong id="coinText">0</strong>
+          <span>GOLD</span>
+        </div>
+      </div>
+
+      <div class="wave-card">
+        <div class="wave-label"><span>WAVE</span><b id="waveNo">1</b></div>
+        <strong id="waveName" class="wave-name">THE OUTSKIRTS</strong>
+        <div class="wave-track"><div id="waveFill" class="wave-fill"></div></div>
+      </div>
+
+      <button id="pauseBtn" class="round-btn" type="button" aria-label="Pause game">
+        <svg class="icon"><use href="#ico-pause"/></svg>
+      </button>
+    </header>
+
+    <div id="bossWrap" class="boss-wrap" hidden>
+      <div class="boss-meta">
+        <span id="bossName">THE GATEKEEPER</span>
+        <span id="bossHpText">900 / 900</span>
+      </div>
+      <div class="boss-track"><div id="bossFill" class="boss-fill"></div></div>
+    </div>
+
+    <div id="announce" class="announce" aria-live="polite">
+      <span id="announceKicker">WAVE 1</span>
+      <strong id="announceTitle">THE OUTSKIRTS</strong>
+      <p id="announceSub">Loot the dead. Stay breathing.</p>
+    </div>
+
+    <div class="dash-wrap">
+      <span class="auto-label"><i></i> AUTO-FIRE</span>
+      <button id="dashBtn" class="dash-btn" type="button" aria-label="Dash">
+        <span id="dashRing" class="dash-ring"></span>
+        <svg class="icon dash-icon"><use href="#ico-dash"/></svg>
+        <span class="dash-caption">DASH</span>
+      </button>
+    </div>
+
+    <div id="touchHint" class="touch-hint">DRAG ANYWHERE TO MOVE</div>
+  </div>
+
+  <section id="startScreen" class="overlay start-screen">
+    <div class="start-top">
+      <div class="mini-brand"><span class="mini-mark">R/G</span><span>ROTGOLD<br><small>SURVIVAL PROTOCOL</small></span></div>
+      <button id="menuSoundBtn" class="round-btn ghost" type="button" aria-label="Toggle sound">
+        <svg class="icon sound-on"><use href="#ico-sound"/></svg>
+        <svg class="icon sound-off"><use href="#ico-mute"/></svg>
+      </button>
+    </div>
+
+    <div class="start-inner">
+      <p class="eyebrow"><span class="pulse-dot"></span> THE DEAD HAVE ALL THE GOLD</p>
+      <h1 class="logo">ROT<span>GOLD</span></h1>
+      <p class="tagline">Loot the horde. Upgrade the gun. Break the crown.</p>
+
+      <div class="start-actions">
+        <button id="startBtn" class="btn btn-primary btn-start" type="button">
+          <span>START RUN</span>
+          <svg class="icon"><use href="#ico-play"/></svg>
+        </button>
+        <button id="startTiltBtn" class="btn btn-ghost tilt-button" type="button">
+          <span class="tilt-led"></span>
+          <span>TILT TO MOVE: <b id="startTiltState">OFF</b></span>
+        </button>
+      </div>
+
+      <div class="start-meta">
+        <div class="record-card">
+          <span class="record-label">BEST RUN</span>
+          <strong><span id="bestWave">0</span> <small>WAVES</small></strong>
+          <span><span id="bestKills">0</span> KILLS &middot; <span id="bestCoins">0</span> GOLD</span>
+        </div>
+        <div class="control-card">
+          <span class="record-label">FIELD MANUAL</span>
+          <p><b>MOVE</b> drag anywhere / <b>FIRE</b> automatic</p>
+          <p><b>DASH</b> right button / <b>AIM</b> closest target</p>
+          <p class="subtle">Collect gold. Spend it in the armory. Ten waves stand between you and the Zombie King.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="start-foot">
+      <span>HEADPHONES RECOMMENDED</span>
+      <span class="build-tag">BUILD 01 // NIGHT SHIFT</span>
+    </div>
+  </section>
+
+  <section id="shopScreen" class="overlay shop-screen" hidden>
+    <div class="sheet">
+      <header class="sheet-head">
+        <div>
+          <p id="shopKicker" class="eyebrow">WAVE 1 CLEARED</p>
+          <h2>ARMORY</h2>
+        </div>
+        <div class="currency-big">
+          <svg class="icon"><use href="#ico-coin"/></svg>
+          <span id="shopCoins">0</span>
+        </div>
+      </header>
+
+      <div class="weapon-band">
+        <div id="weaponOrb" class="weapon-orb"><span></span></div>
+        <div class="weapon-copy">
+          <span>EQUIPPED</span>
+          <strong id="shopWeapon">RUST PISTOL</strong>
+          <small id="shopWeaponDesc">Reliable. Ugly. Yours.</small>
+        </div>
+        <div class="weapon-dps">
+          <span>DPS</span>
+          <strong id="shopDps">36</strong>
+        </div>
+      </div>
+
+      <div id="upgradeGrid" class="upgrade-grid"></div>
+
+      <footer class="sheet-foot">
+        <button id="nextWaveBtn" class="btn btn-primary" type="button">
+          <span>NEXT WAVE <b id="nextWaveNo">2</b></span>
+          <svg class="icon"><use href="#ico-arrow"/></svg>
+        </button>
+        <p>Gold carries over. Upgrades are permanent.</p>
+      </footer>
+    </div>
+  </section>
+
+  <section id="pauseScreen" class="overlay center-screen" hidden>
+    <div class="modal">
+      <p class="eyebrow">TAKE A BREATH</p>
+      <h2>PAUSED</h2>
+      <div class="pause-actions">
+        <button id="resumeBtn" class="btn btn-primary" type="button"><span>RESUME</span><svg class="icon"><use href="#ico-play"/></svg></button>
+        <div class="setting-row">
+          <span>Sound</span>
+          <button id="soundToggle" class="switch" type="button" role="switch" aria-label="Sound"><span></span></button>
+        </div>
+        <div class="setting-row">
+          <span>Tilt steering</span>
+          <button id="tiltToggle" class="switch" type="button" role="switch" aria-label="Tilt steering"><span></span></button>
+        </div>
+        <button id="calibrateBtn" class="btn btn-small" type="button">RECALIBRATE TILT</button>
+        <button id="quitBtn" class="btn btn-ghost danger" type="button">ABANDON RUN</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="endScreen" class="overlay center-screen" hidden>
+    <div id="endCard" class="modal end-card">
+      <p id="endKicker" class="eyebrow">RUN OVER</p>
+      <h2 id="endTitle">THE HORDE WON</h2>
+      <p id="endSub" class="end-sub">They keep the gold. This time.</p>
+      <div class="end-stats">
+        <div><span>WAVES</span><strong id="endWave">0</strong></div>
+        <div><span>KILLS</span><strong id="endKills">0</strong></div>
+        <div><span>GOLD</span><strong id="endCoins">0</strong></div>
+        <div><span>TIME</span><strong id="endTime">0:00</strong></div>
+      </div>
+      <div class="end-actions">
+        <button id="retryBtn" class="btn btn-primary" type="button"><span>RUN IT BACK</span><svg class="icon"><use href="#ico-arrow"/></svg></button>
+        <button id="menuBtn" class="btn btn-ghost" type="button">MAIN MENU</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
